@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: tienda-postgres
+    restart: unless-stopped
+    command: ["postgres", "-c", "hba_file=/etc/postgresql/pg_hba.conf"]
+    environment:
+      POSTGRES_USER: tienda
+      POSTGRES_DB: tienda_db
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tienda -d tienda_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  postgres_data:
+    external: true
