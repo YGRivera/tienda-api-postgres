@@ -19,3 +19,4 @@ databases:
     plan: free
     databaseName: tienda_db
     user: tienda
+    ipAllowList: []
