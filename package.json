@@ -1,0 +1,14 @@
+{
+  "name": "tienda-api-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API local de tienda con Node.js y PostgreSQL en Docker",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
