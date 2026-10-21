@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: tienda-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TIENDA_DATABASE_URL
+        fromDatabase:
+          name: tienda-postgres
+          property: connectionString
+
+databases:
+  - name: tienda-postgres
+    plan: free
+    databaseName: tienda_db
+    user: tienda
