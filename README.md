@@ -4,14 +4,9 @@ API REST para consultar productos de una tienda. Guarda `id`, `nombre`, `precio`
 
 ## API pública en Render
 
-El archivo `render.yaml` configura un servicio web Node.js y una base PostgreSQL administrada en el plan gratuito. Para desplegar:
+La API está desplegada en [https://tienda-api-olx7.onrender.com](https://tienda-api-olx7.onrender.com). Prueba [un producto por ID](https://tienda-api-olx7.onrender.com/api/productos/1), [la lista completa](https://tienda-api-olx7.onrender.com/api/productos) o [el estado de la base](https://tienda-api-olx7.onrender.com/health).
 
-1. Sube este repositorio público a GitHub.
-2. En Render, selecciona **New > Blueprint** y conecta el repositorio.
-3. Revisa los recursos `tienda-api` y `tienda-postgres`, y aplica el Blueprint.
-4. Cuando el despliegue termine, abre `https://<nombre-del-servicio>.onrender.com/api/productos/1`.
-
-Render configura `TIENDA_DATABASE_URL` desde la base administrada; no subas el archivo `.env`.
+El archivo `render.yaml` configura el servicio web Node.js y PostgreSQL administrado. Render configura `TIENDA_DATABASE_URL` desde la base; no subas el archivo `.env`.
 
 **Nota del plan gratuito:** la base PostgreSQL gratuita de Render vence 30 días después de crearla. Si la práctica debe seguir disponible después, habrá que cambiar a un plan pagado antes de que venza; Render ofrece 14 días de gracia después del vencimiento y luego elimina la base y sus datos. El servicio web gratuito puede suspenderse cuando está inactivo.
 
@@ -21,6 +16,7 @@ Requisitos: Docker Desktop iniciado y Node.js 20 o posterior.
 
 ```powershell
 Copy-Item .env.example .env
+docker volume create postgres_data
 docker compose up -d
 npm ci
 npm start
